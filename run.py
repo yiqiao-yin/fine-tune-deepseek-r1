@@ -12,10 +12,17 @@ def main() -> None:
     fits the model using the processed dataset, and finally saves the fine-tuned model 
     and tokenizer locally.
     """
-    # Define the model name and dataset identifier for fine-tuning
-    model_name = "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
-    dataset_identifier = "FreedomIntelligence/medical-o1-reasoning-SFT"
-    domain = "some-ai-domain-v3"
+    # Define the model name identifier for fine-tuning
+    default_model_name = "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
+    model_name = input(f"Enter model name (default: {default_model_name}): ") or default_model_name
+
+    # Define the dataset identifier for fine-tuning
+    default_dataset_identifier = "FreedomIntelligence/medical-o1-reasoning-SFT"
+    dataset_identifier = input(f"Enter dataset identifier (default: {default_dataset_identifier}): ") or default_dataset_identifier
+
+    # Define the domain identifier for fine-tuning
+    default_domain = "name-of-domain-you-want"
+    domain = input(f"Enter domain (default: {default_domain}): ") or default_domain
     
     # Instantiate the FineTuner object with the provided model name, dataset identifier, and domain
     fine_tuner = FineTuner(model_name=model_name, text=dataset_identifier, domain=domain)
