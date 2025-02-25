@@ -23,6 +23,7 @@ class FineTuner:
             domain (str): Domain identifier for naming the saved model.
         """
         self.model_name: str = model_name
+        self.model_name_tag: str = self.model_name.split("/")[1]
         self.text: str = text  # This now represents the dataset identifier
         self.domain: str = domain
 
@@ -50,7 +51,7 @@ class FineTuner:
         resulting texts for causal language modeling training.
         """
         # Load the dataset using self.text as the dataset identifier
-        dataset = load_dataset(self.text, "en", split="train[0:100]", trust_remote_code=True)
+        dataset = load_dataset(self.text, "en", split="train[0:500]", trust_remote_code=True)
         
         # Define the prompt style template
         train_prompt_style = """Below is an instruction that describes a task, paired with an input that provides further context.
@@ -165,7 +166,7 @@ Please answer the following medical question.
                 If not provided, a default name based on the domain is used.
         """
         if save_directory is None:
-            save_directory = f"fine-tuned-deepseek-r1-1.5b-{self.domain}"
+            save_directory = f"{self.model_name_tag}-{self.domain}"
         
         # Save the model and tokenizer to the specified directory
         self.model.save_pretrained(save_directory)
