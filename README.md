@@ -67,6 +67,17 @@ To run the inference script:
 python inference.py
 ```
 
+## Saving to HuggingFace
+Post training, you want to save the model artifacts to HuggingFace using `save_to_hf.py`:
+1. The script pushes the model artifact to HuggingFace cloud under your account
+2. It prompts to ask you to enter HuggingFace token.
+3. It prompts to ask you ideal repo name and user name of your HuggingFace account.
+
+To run the script:
+```bash
+python save_to_hf.py
+```
+
 ## Additional Notes
 - Ensure that you have proper access permissions and credentials for any remote datasets (e.g., Hugging Face datasets).
 - You may need to adjust parameters like model names, dataset identifiers, and training settings in the scripts according to your needs.
